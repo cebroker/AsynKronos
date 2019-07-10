@@ -6,8 +6,8 @@
 //  Copyright © 2019 Condor Labs S.A.S. All rights reserved.
 //
 
-class Async {
-    class func await(
+public class Async {
+    public class func await(
         _ closure: @escaping () -> ()) {
         
         DispatchQueue.global(qos: .userInitiated).sync {
@@ -15,7 +15,7 @@ class Async {
         }
     }
     
-    class func await(
+    public class func await(
         _ closure: @escaping () throws -> (),
         onError: (Error) -> (),
         doFinally: @escaping () -> () = { }) {
