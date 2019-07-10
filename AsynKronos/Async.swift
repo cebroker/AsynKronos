@@ -17,7 +17,7 @@ public class Async {
     
     public class func await(
         _ closure: @escaping () throws -> (),
-        onError: (Error) -> (),
+        onError: @escaping (Error) -> (),
         doFinally: @escaping () -> () = { }) {
         
         DispatchQueue.global(qos: .userInitiated).sync {
@@ -25,7 +25,9 @@ public class Async {
             do {
                 try closure()
             } catch {
-                onError(error)
+                DispatchQueue.main.async {
+                    onError(error)
+                }
             }
             
             DispatchQueue.main.async {
